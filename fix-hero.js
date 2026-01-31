@@ -1,0 +1,31 @@
+const fs = require('fs');
+const content = `<section class="relative bg-ocean/10 py-20 lg:py-32">
+  <div class="container mx-auto px-4 flex flex-col-reverse lg:flex-row items-center gap-12">
+    <div class="lg:w-1/2 space-y-6">
+      <h1 class="text-4xl lg:text-5xl font-bold text-slate-800 leading-tight">
+        Let me do the planning, <br>
+        <span class="text-ocean">you just enjoy your vacation!</span>
+      </h1>
+      <p class="text-lg text-slate-600">
+        Professional travel planning services at no extra cost to you. From romantic getaways to family reunions, I handle the details so you can make the memories.
+      </p>
+      <div class="flex gap-4">
+        <a routerLink="/" fragment="contact" class="bg-sunset text-white px-8 py-3 rounded-lg font-bold hover:bg-orange-600 transition shadow-lg cursor-pointer inline-block">
+          LET ME PLAN YOUR TRIP FREE!
+        </a>
+      </div>
+    </div>
+    <div class="lg:w-1/2 w-full">
+      <div class="aspect-video bg-blue-200 rounded-xl shadow-2xl flex items-center justify-center text-blue-800 font-bold text-xl">
+        Hero Image Placeholder
+      </div>
+    </div>
+  </div>
+</section>`;
+
+try {
+  fs.writeFileSync('src/app/components/hero/hero.html', content, 'utf8');
+  console.log('Overwritten hero.html successfully');
+} catch (err) {
+  console.error('Error writing file:', err);
+}

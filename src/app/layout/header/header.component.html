@@ -7,12 +7,8 @@
   <div class="container mx-auto px-4 flex justify-between items-center relative">
     <a
       routerLink="/"
-      class="text-2xl font-bold flex items-center gap-3 transition-colors duration-300"
-      [ngClass]="
-        isScrolled || isMenuOpen || !isHomePage()
-          ? 'text-brand-deep'
-          : 'text-brand-deep md:text-white'
-      "
+      class="text-2xl font-bold flex items-center gap-2 md:gap-3 transition-colors duration-300"
+      [ngClass]="isScrolled || isMenuOpen || !isHomePage() ? 'text-brand-deep' : 'text-white'"
     >
       <img
         ngSrc="assets/Jetsetting-With-Kayla.png"
@@ -20,11 +16,11 @@
         height="64"
         priority
         alt="Jetsetting with Kayla"
-        class="h-16 w-auto"
+        class="h-10 w-auto md:h-16"
       />
       <div class="flex flex-col uppercase tracking-widest">
-        <span class="text-lg md:text-xl leading-none">Jetsetting</span>
-        <span class="text-sm md:text-base leading-none">with Kayla</span>
+        <span class="text-sm md:text-xl leading-none">Jetsetting</span>
+        <span class="text-[10px] md:text-base leading-none">with Kayla</span>
       </div>
     </a>
 

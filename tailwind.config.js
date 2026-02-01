@@ -21,7 +21,8 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Lato', 'sans-serif'],
-        display: ['Poppins', 'sans-serif'],
+        display: ['"Playfair Display"', 'serif'],
+        body: ['Lato', 'sans-serif'],
       },
     },
   },

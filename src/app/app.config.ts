@@ -1,9 +1,10 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideClientHydration } from '@angular/platform-browser';
-import { provideFirebaseApp, initializeApp } from '@angular/fire/app'; // New import
+import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
+import { getAnalytics, provideAnalytics, ScreenTrackingService, UserTrackingService } from '@angular/fire/analytics';
 import { getFunctions, provideFunctions } from '@angular/fire/functions';
-import { environment } from '../environments/environment'; // New import
+import { environment } from '../environments/environment';
 
 import { routes } from './app.routes';
 
@@ -12,7 +13,10 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
     provideClientHydration(),
-    provideFirebaseApp(() => initializeApp(environment.firebase)), // New provider
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAnalytics(() => getAnalytics()),
+    ScreenTrackingService,
+    UserTrackingService,
     provideFunctions(() => getFunctions()),
   ],
 };

@@ -34,36 +34,8 @@
       aria-label="Toggle menu"
       [attr.aria-expanded]="isMenuOpen"
     >
-      <svg
-        *ngIf="!isMenuOpen"
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-6 w-6"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M4 6h16M4 12h16M4 18h16"
-        />
-      </svg>
-      <svg
-        *ngIf="isMenuOpen"
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-6 w-6"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M6 18L18 6M6 6l12 12"
-        />
-      </svg>
+      <lucide-icon *ngIf="!isMenuOpen" name="menu" class="h-6 w-6 text-slate-700"></lucide-icon>
+      <lucide-icon *ngIf="isMenuOpen" name="x" class="h-6 w-6 text-slate-700"></lucide-icon>
     </button>
   </div>
 

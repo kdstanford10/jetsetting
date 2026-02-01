@@ -55,7 +55,8 @@
           <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-slate-100 group">
             <div
               [class]="
-                'h-96 flex items-center justify-center overflow-hidden relative ' + service.color
+                'h-[600px] flex items-center justify-center overflow-hidden relative ' +
+                service.color
               "
             >
               @if (service.image) {
@@ -71,9 +72,7 @@
               }
             </div>
             <div class="p-6">
-              <h3
-                class="text-xl font-bold text-brand mb-2 font-display group-hover:text-brand-dark transition"
-              >
+              <h3 class="text-xl font-bold text-brand mb-2 font-display">
                 {{ service.title }}
               </h3>
               <p class="text-slate-600 text-sm font-sans">{{ service.description }}</p>
@@ -84,7 +83,7 @@
     </div>
   </section>
 } @placeholder {
-  <div class="h-96 bg-slate-50 flex items-center justify-center">Loading services...</div>
+  <div class="h-[500px] bg-slate-50 flex items-center justify-center">Loading services...</div>
 }
 
 <!-- About Section -->
@@ -103,9 +102,9 @@
           class="bg-white p-8 rounded-xl shadow text-center transform transition duration-300 border-t-4 border-brand"
         >
           <div
-            class="bg-brand/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-brand text-2xl"
+            class="bg-brand/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-brand"
           >
-            🛡️
+            <lucide-icon name="shield-check" class="w-8 h-8"></lucide-icon>
           </div>
           <h3 class="text-xl font-bold text-slate-800 mb-3 font-display">Peace of Mind</h3>
           <p class="text-slate-600 font-sans">
@@ -119,9 +118,9 @@
           class="bg-white p-8 rounded-xl shadow text-center transform transition duration-300 border-t-4 border-brand"
         >
           <div
-            class="bg-brand/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-brand text-2xl"
+            class="bg-brand/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-brand"
           >
-            📋
+            <lucide-icon name="clipboard-check" class="w-8 h-8"></lucide-icon>
           </div>
           <h3 class="text-xl font-bold text-slate-800 mb-3 font-display">Stress Free Planning</h3>
           <p class="text-slate-600 font-sans">
@@ -135,9 +134,9 @@
           class="bg-white p-8 rounded-xl shadow text-center transform transition duration-300 border-t-4 border-brand"
         >
           <div
-            class="bg-brand/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-brand text-2xl"
+            class="bg-brand/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-brand"
           >
-            💡
+            <lucide-icon name="lightbulb" class="w-8 h-8"></lucide-icon>
           </div>
           <h3 class="text-xl font-bold text-slate-800 mb-3 font-display">Expertise & Knowledge</h3>
           <p class="text-slate-600 font-sans">
@@ -151,9 +150,9 @@
           class="bg-white p-8 rounded-xl shadow text-center transform transition duration-300 border-t-4 border-brand"
         >
           <div
-            class="bg-brand/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-brand text-2xl"
+            class="bg-brand/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-brand"
           >
-            ✏️
+            <lucide-icon name="pencil" class="w-8 h-8"></lucide-icon>
           </div>
           <h3 class="text-xl font-bold text-slate-800 mb-3 font-display">Tips & Tricks</h3>
           <p class="text-slate-600 font-sans">
@@ -190,7 +189,9 @@
         </p>
         <ul class="space-y-4 font-sans">
           <li class="flex items-center gap-4">
-            <span class="bg-white/20 p-3 rounded-full">📧</span>
+            <span class="bg-white/20 p-3 rounded-full flex items-center justify-center">
+              <lucide-icon name="mail" class="w-5 h-5 text-white"></lucide-icon>
+            </span>
             <span>Hello@jetsettingwithkayla.com</span>
           </li>
         </ul>

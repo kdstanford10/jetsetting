@@ -3,6 +3,16 @@ import { RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Functions, httpsCallable } from '@angular/fire/functions';
+import {
+  LucideAngularModule,
+  ShieldCheck,
+  ClipboardCheck,
+  Lightbulb,
+  Pencil,
+  Mail,
+  LUCIDE_ICONS,
+  LucideIconProvider,
+} from 'lucide-angular';
 
 interface TripType {
   title: string;
@@ -15,7 +25,13 @@ interface TripType {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink, NgOptimizedImage],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, NgOptimizedImage, LucideAngularModule],
+  providers: [
+    {
+      provide: LUCIDE_ICONS,
+      useValue: new LucideIconProvider({ ShieldCheck, ClipboardCheck, Lightbulb, Pencil, Mail }),
+    },
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })

@@ -1,15 +1,12 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { Functions, httpsCallable } from '@angular/fire/functions';
 import {
   LucideAngularModule,
   ShieldCheck,
   ClipboardCheck,
   Lightbulb,
   Pencil,
-  Mail,
   LUCIDE_ICONS,
   LucideIconProvider,
 } from 'lucide-angular';
@@ -25,20 +22,17 @@ interface TripType {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink, NgOptimizedImage, LucideAngularModule],
+  imports: [CommonModule, RouterLink, NgOptimizedImage, LucideAngularModule],
   providers: [
     {
       provide: LUCIDE_ICONS,
-      useValue: new LucideIconProvider({ ShieldCheck, ClipboardCheck, Lightbulb, Pencil, Mail }),
+      useValue: new LucideIconProvider({ ShieldCheck, ClipboardCheck, Lightbulb, Pencil }),
     },
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
 export class HomeComponent {
-  private functions = inject(Functions);
-  private fb = inject(FormBuilder);
-
   // Services Data
   services: TripType[] = [
     {
@@ -57,36 +51,4 @@ export class HomeComponent {
       image: 'assets/Untitled-design131-683x1024.png',
     },
   ];
-
-  // Contact Form
-  contactForm: FormGroup = this.fb.group({
-    name: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
-    phone: [''],
-    tripType: ['Family Vacation', Validators.required],
-    message: ['', Validators.required],
-  });
-
-  isSubmitting = false;
-  submitSuccess = false;
-  submitError = '';
-
-  async onSubmit() {
-    if (this.contactForm.invalid) return;
-
-    this.isSubmitting = true;
-    this.submitError = '';
-
-    try {
-      const submitFn = httpsCallable(this.functions, 'submitContactForm');
-      await submitFn(this.contactForm.value);
-      this.submitSuccess = true;
-      this.contactForm.reset({ tripType: 'Family Vacation' });
-    } catch (error) {
-      console.error(error);
-      this.submitError = 'There was a problem sending your message. Please try again later.';
-    } finally {
-      this.isSubmitting = false;
-    }
-  }
 }

@@ -1,168 +1,225 @@
-<!-- Hero Section -->
-<section class="relative bg-brand/10 py-20 lg:py-32">
-  <div class="max-w-6xl mx-auto px-4 flex flex-col-reverse lg:flex-row items-center gap-12">
-    <div class="lg:w-1/2 space-y-6">
-      <h1 class="text-4xl lg:text-5xl font-bold text-slate-800 leading-tight">
-        Let me do the planning, <br />
-        <span class="text-brand">you just enjoy your vacation!</span>
-      </h1>
+<!-- Hero Section: Editorial Split -->
+<section class="min-h-screen flex flex-col md:flex-row bg-brand-deep">
+  <!-- Text Content Area -->
+  <div
+    class="w-full md:w-1/2 flex flex-col justify-center px-8 md:px-20 pt-40 pb-20 md:py-20 text-white z-10 relative"
+  >
+    <div
+      class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"
+    ></div>
 
-      <p class="text-lg text-slate-600">
-        Professional travel planning services at no extra cost to you. From romantic getaways to
-        family reunions, I handle the details so you can make the memories.
-      </p>
+    <span
+      class="font-sans font-bold tracking-[0.3em] text-sm md:text-base text-brand mb-6 uppercase hidden md:block"
+    >
+      Jetsetting with Kayla
+    </span>
 
-      <div class="flex gap-4">
-        <a
-          routerLink="/contact"
-          class="bg-brand text-white px-8 py-3 rounded-lg font-bold hover:bg-brand-dark transition shadow-lg cursor-pointer inline-block"
-        >
-          LET ME PLAN YOUR TRIP FREE!
-        </a>
-      </div>
+    <h1 class="font-display text-5xl md:text-7xl lg:text-8xl leading-none mb-8">
+      SAY HELLO TO <br />
+      <span class="italic text-brand-light">PARADISE</span>
+    </h1>
+
+    <p class="font-sans text-lg md:text-xl text-gray-200 leading-relaxed mb-12 max-w-md">
+      Professional travel planning at no extra cost. I handle the stressful details so you can focus
+      on making memories.
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-6">
+      <a
+        routerLink="/contact"
+        class="inline-block bg-white text-brand-deep px-10 py-5 font-bold tracking-widest text-sm hover:bg-brand hover:text-white transition duration-300 shadow-2xl"
+      >
+        START PLANNING
+      </a>
     </div>
+  </div>
 
-    <div class="lg:w-1/2 w-full flex justify-center lg:justify-end">
-      <img
-        ngSrc="assets/photo3012261.jpeg"
-        width="600"
-        height="800"
-        priority
-        alt="Kayla Gosney - Travel Planner"
-        class="rounded-xl shadow-2xl max-h-[600px] w-auto object-contain"
-      />
-    </div>
+  <!-- Hero Image Area -->
+  <div class="w-full md:w-1/2 h-[50vh] md:h-auto relative">
+    <div class="absolute inset-0 bg-brand-deep/20 z-10"></div>
+    <img
+      ngSrc="assets/photo3012261.jpeg"
+      fill
+      priority
+      alt="Kayla Gosney - Travel Planner"
+      class="object-cover object-top filter contrast-[1.1]"
+    />
   </div>
 </section>
 
-<!-- Services Grid Section -->
+<!-- Mission Statement Band -->
+<section class="py-24 bg-champagne text-center px-4">
+  <div class="max-w-4xl mx-auto">
+    <h2 class="font-display text-4xl md:text-5xl text-slate-800 mb-8 leading-tight">
+      "I plan the trip, you pack the bags."
+    </h2>
+    <div class="w-24 h-1 bg-brand-deep mx-auto mb-8"></div>
+    <p class="font-sans text-slate-600 text-lg leading-loose">
+      From romantic honeymoons to chaotic family reunions, every trip deserves to be perfect. My
+      services are completely free to you—I get paid by the vendors, not my clients. Let's build
+      your dream itinerary together.
+    </p>
+  </div>
+</section>
+
+<!-- Services "Editorial" Rows -->
 @defer (on viewport) {
-  <section id="services" class="py-20 bg-white">
+  <section id="services" class="bg-white">
+    @for (service of services; track service.title; let i = $index) {
+      <div class="flex flex-col md:flex-row min-h-[600px] group">
+        <!-- Image Side -->
+        <div class="w-full md:w-1/2 relative min-h-[400px]" [class.md:order-2]="i % 2 === 0">
+          @if (service.image) {
+            <div class="absolute inset-0 bg-slate-900/10 transition duration-700 z-10"></div>
+            <img
+              [ngSrc]="service.image"
+              fill
+              [alt]="service.title"
+              class="w-full h-full object-cover transition-transform duration-1000"
+              [class]="service.imageClass || 'object-center'"
+            />
+          } @else {
+            <div
+              class="w-full h-full bg-slate-100 flex items-center justify-center text-slate-300 font-display text-4xl uppercase"
+            >
+              {{ service.title }}
+            </div>
+          }
+        </div>
+
+        <!-- Text Side -->
+        <div
+          class="w-full md:w-1/2 flex items-center justify-center p-12 md:p-24 bg-white"
+          [class.md:order-1]="i % 2 === 0"
+        >
+          <div class="max-w-md">
+            <span class="block text-brand-deep font-bold tracking-widest text-xs uppercase mb-4">
+              Service 0{{ i + 1 }}
+            </span>
+            <h3 class="font-display text-4xl text-slate-900 mb-6">
+              {{ service.title }}
+            </h3>
+            <p class="font-sans text-slate-600 leading-relaxed mb-8 text-lg">
+              {{ service.description }}
+            </p>
+            <a
+              routerLink="/contact"
+              class="inline-flex items-center text-brand-deep font-bold tracking-wider text-sm hover:text-brand transition duration-300"
+            >
+              PLAN THIS TRIP <lucide-icon name="pencil" class="ml-2 h-4 w-4"></lucide-icon>
+            </a>
+          </div>
+        </div>
+      </div>
+    }
+  </section>
+} @placeholder {
+  <div
+    class="h-[500px] bg-white flex items-center justify-center font-display text-2xl animate-pulse"
+  >
+    Loading Experiences...
+  </div>
+}
+
+<!-- Why Hire Me - Minimal Grid -->
+@defer (on viewport) {
+  <section id="about" class="py-32 bg-sand-light">
     <div class="container mx-auto px-4">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl font-bold text-slate-800 mb-4 font-display">
-          What type of trip do you want?
+      <div class="text-center mb-20">
+        <h2 class="font-display text-4xl font-bold text-slate-800 mb-6">
+          The Jetsetting Advantage
         </h2>
-        <p class="text-slate-600 max-w-2xl mx-auto font-sans">
-          From solo travel to large group vacations, I can plan it all. Just tell me how many
-          people, the age ranges, and type of destination and I will do the rest!
+        <p class="text-slate-500 uppercase tracking-widest text-sm font-bold">
+          Why book with an agent?
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-        @for (service of services; track service.title) {
-          <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-slate-100 group">
-            <div
-              [class]="
-                'h-[600px] flex items-center justify-center overflow-hidden relative ' +
-                service.color
-              "
-            >
-              @if (service.image) {
-                <img
-                  [ngSrc]="service.image"
-                  fill
-                  [alt]="service.title"
-                  class="w-full h-full object-cover transition-all duration-500"
-                  [class]="service.imageClass || 'object-center'"
-                />
-              } @else {
-                <span class="text-slate-700 font-bold opacity-50">{{ service.title }} Image</span>
-              }
-            </div>
-            <div class="p-6">
-              <h3 class="text-xl font-bold text-brand mb-2 font-display">
-                {{ service.title }}
-              </h3>
-              <p class="text-slate-600 text-sm font-sans">{{ service.description }}</p>
-            </div>
-          </div>
-        }
-      </div>
-    </div>
-  </section>
-} @placeholder {
-  <div class="h-[500px] bg-slate-50 flex items-center justify-center">Loading services...</div>
-}
-
-<!-- About Section -->
-@defer (on viewport) {
-  <section id="about" class="py-20 bg-sand/30">
-    <div class="container mx-auto px-4">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl font-bold text-slate-800 mb-4 font-display">
-          4 Reasons to Hire a Travel Agent
-        </h2>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pt-16">
         <!-- 1 -->
         <div
-          class="bg-white p-8 rounded-xl shadow text-center transform transition duration-300 border-t-4 border-brand"
+          class="bg-white p-10 border border-sand-dark/50 shadow-sm flex flex-col items-center text-center h-full"
         >
           <div
-            class="bg-brand/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-brand"
+            class="w-24 h-24 mb-6 bg-sand-light rounded-full flex items-center justify-center text-brand-deep"
           >
-            <lucide-icon name="shield-check" class="w-8 h-8"></lucide-icon>
+            <lucide-icon name="shield-check" class="w-12 h-12"></lucide-icon>
           </div>
-          <h3 class="text-xl font-bold text-slate-800 mb-3 font-display">Peace of Mind</h3>
-          <p class="text-slate-600 font-sans">
-            By entrusting your vacation planning to a professional travel agent, you gain peace of
-            mind knowing that every detail is taken care of, allowing you to relax and enjoy your
-            trip without worrying about logistics or arrangements.
+          <h3 class="font-display text-xl font-bold text-slate-800 mb-4 uppercase tracking-wider">
+            Stress Free
+          </h3>
+          <p class="text-slate-600 leading-relaxed font-sans text-sm">
+            I handle the logistics, so you don't play specialized phone tag with airlines or
+            resorts.
           </p>
         </div>
+
         <!-- 2 -->
         <div
-          class="bg-white p-8 rounded-xl shadow text-center transform transition duration-300 border-t-4 border-brand"
+          class="bg-white p-10 border border-sand-dark/50 shadow-sm flex flex-col items-center text-center h-full"
         >
           <div
-            class="bg-brand/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-brand"
+            class="w-24 h-24 mb-6 bg-sand-light rounded-full flex items-center justify-center text-brand-deep"
           >
-            <lucide-icon name="clipboard-check" class="w-8 h-8"></lucide-icon>
+            <lucide-icon name="clipboard-check" class="w-12 h-12"></lucide-icon>
           </div>
-          <h3 class="text-xl font-bold text-slate-800 mb-3 font-display">Stress Free Planning</h3>
-          <p class="text-slate-600 font-sans">
-            From itinerary creation to handling unforeseen circumstances during your trip, a travel
-            agent provides ongoing support and assistance, ensuring a stress-free travel experience
-            from start to finish.
+          <h3 class="font-display text-xl font-bold text-slate-800 mb-4 uppercase tracking-wider">
+            Itinerary Planning
+          </h3>
+          <p class="text-slate-600 leading-relaxed font-sans text-sm">
+            Detailed schedules including transfers, excursions, and dining reservations.
           </p>
         </div>
+
         <!-- 3 -->
         <div
-          class="bg-white p-8 rounded-xl shadow text-center transform transition duration-300 border-t-4 border-brand"
+          class="bg-white p-10 border border-sand-dark/50 shadow-sm flex flex-col items-center text-center h-full"
         >
           <div
-            class="bg-brand/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-brand"
+            class="w-24 h-24 mb-6 bg-sand-light rounded-full flex items-center justify-center text-brand-deep"
           >
-            <lucide-icon name="lightbulb" class="w-8 h-8"></lucide-icon>
+            <lucide-icon name="lightbulb" class="w-12 h-12"></lucide-icon>
           </div>
-          <h3 class="text-xl font-bold text-slate-800 mb-3 font-display">Expertise & Knowledge</h3>
-          <p class="text-slate-600 font-sans">
-            Travel agents have comprehensive knowledge of destinations, accommodations,
-            transportation options, and activities, ensuring you make informed decisions tailored to
-            your preferences and budget.
+          <h3 class="font-display text-xl font-bold text-slate-800 mb-4 uppercase tracking-wider">
+            Expert Advice
+          </h3>
+          <p class="text-slate-600 leading-relaxed font-sans text-sm">
+            Personal experience with top resorts and destinations. I know where to find the best
+            views.
           </p>
         </div>
+
         <!-- 4 -->
         <div
-          class="bg-white p-8 rounded-xl shadow text-center transform transition duration-300 border-t-4 border-brand"
+          class="bg-white p-10 border border-sand-dark/50 shadow-sm flex flex-col items-center text-center h-full"
         >
           <div
-            class="bg-brand/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-brand"
+            class="w-24 h-24 mb-6 bg-sand-light rounded-full flex items-center justify-center text-brand-deep"
           >
-            <lucide-icon name="pencil" class="w-8 h-8"></lucide-icon>
+            <lucide-icon name="pencil" class="w-12 h-12"></lucide-icon>
           </div>
-          <h3 class="text-xl font-bold text-slate-800 mb-3 font-display">Tips & Tricks</h3>
-          <p class="text-slate-600 font-sans">
-            Travel agents have insider knowledge about destinations, including hidden gems, local
-            customs, and must try experiences, enriching your vacation with unique insights and
-            opportunities.
+          <h3 class="font-display text-xl font-bold text-slate-800 mb-4 uppercase tracking-wider">
+            Custom Tailored
+          </h3>
+          <p class="text-slate-600 leading-relaxed font-sans text-sm">
+            No cookie-cutter packages. Your trip is built specifically for your needs and budget.
           </p>
         </div>
+      </div>
+
+      <div class="text-center mt-20">
+        <a
+          routerLink="/contact"
+          class="inline-block border-2 border-slate-800 text-slate-800 px-12 py-4 font-bold tracking-widest hover:bg-slate-800 hover:text-white transition duration-300"
+        >
+          GET IN TOUCH
+        </a>
       </div>
     </div>
   </section>
 } @placeholder {
-  <div class="h-96 bg-sand/30 flex items-center justify-center">Loading expertise...</div>
+  <div
+    class="h-96 bg-sand-light flex items-center justify-center font-display tracking-widest text-slate-400"
+  >
+    LOADING ADVANTAGE...
+  </div>
 }

@@ -3,15 +3,30 @@ module.exports = {
   content: ['./src/**/*.{html,ts}'],
   theme: {
     extend: {
+      borderRadius: {
+        DEFAULT: '0',
+        sm: '0',
+        md: '0',
+        lg: '0',
+        xl: '0',
+        '2xl': '0',
+        '3xl': '0',
+      },
       colors: {
         brand: {
           DEFAULT: '#48c5bf', // SVG Wave Teal
           dark: '#1d5f5c', // Darker shade for text
+          deep: '#0E4D52', // Deep luxury teal
           light: '#79ded4', // SVG Ocean Teal
         },
         sand: {
-          DEFAULT: '#f7f5f0', // Keep clean linen for main backgrounds
-          dark: '#fee3a8', // SVG Sand (Golden)
+          DEFAULT: '#F9F7F2', // Lighter, cleaner sand
+          dark: '#E6DCC3', // Deep styling sand
+          accent: '#D4C5A9', // Metallic sand
+        },
+        champagne: {
+          DEFAULT: '#F3E5D8',
+          light: '#FDFBF7',
         },
         accent: {
           DEFAULT: '#ff959b', // SVG Pink
@@ -22,7 +37,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Lato', 'sans-serif'],
-        display: ['Poppins', 'sans-serif'],
+        display: ['Playfair Display', 'serif'],
       },
     },
   },

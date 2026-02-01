@@ -1,7 +1,8 @@
-import { Component, HostListener } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, HostListener, inject, signal } from '@angular/core';
+import { Router, RouterLink, NavigationEnd } from '@angular/router';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { LucideAngularModule, Menu, X, LUCIDE_ICONS, LucideIconProvider } from 'lucide-angular';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -12,8 +13,19 @@ import { LucideAngularModule, Menu, X, LUCIDE_ICONS, LucideIconProvider } from '
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
+  private router = inject(Router);
+
   isScrolled = false;
   isMenuOpen = false;
+  isHomePage = signal<boolean>(true);
+
+  constructor() {
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: any) => {
+        this.isHomePage.set(event.url === '/' || event.urlAfterRedirects === '/');
+      });
+  }
 
   @HostListener('window:scroll', [])
   onWindowScroll() {

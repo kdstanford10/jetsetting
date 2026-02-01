@@ -1,9 +1,19 @@
 <header
   class="fixed w-full top-0 z-50 font-display transition-all duration-500"
-  [ngClass]="isScrolled || isMenuOpen ? 'bg-white shadow-md' : 'bg-transparent'"
+  [ngClass]="
+    isScrolled || isMenuOpen || !isHomePage() ? 'bg-white shadow-md py-2' : 'bg-transparent py-6'
+  "
 >
-  <div class="container mx-auto px-4 py-4 flex justify-between items-center relative">
-    <a routerLink="/" class="text-2xl font-bold text-brand-dark flex items-center gap-3">
+  <div class="container mx-auto px-4 flex justify-between items-center relative">
+    <a
+      routerLink="/"
+      class="text-2xl font-bold flex items-center gap-3 transition-colors duration-300"
+      [ngClass]="
+        isScrolled || isMenuOpen || !isHomePage()
+          ? 'text-brand-deep'
+          : 'text-brand-deep md:text-white'
+      "
+    >
       <img
         ngSrc="assets/Jetsetting-With-Kayla.png"
         width="64"
@@ -12,16 +22,27 @@
         alt="Jetsetting with Kayla"
         class="h-16 w-auto"
       />
-      Jetsetting with Kayla
+      <div class="flex flex-col uppercase tracking-widest">
+        <span class="text-lg md:text-xl leading-none">Jetsetting</span>
+        <span class="text-sm md:text-base leading-none">with Kayla</span>
+      </div>
     </a>
 
     <!-- Desktop Menu -->
-    <nav class="hidden md:flex space-x-6 text-slate-700 font-medium items-center">
-      <a routerLink="/" class="hover:text-brand transition">Home</a>
-      <a routerLink="/about" class="hover:text-brand transition">About</a>
+    <nav
+      class="hidden md:flex space-x-8 font-medium items-center tracking-wide text-sm uppercase transition-colors duration-300"
+      [ngClass]="isScrolled || !isHomePage() ? 'text-brand-deep' : 'text-white'"
+    >
+      <a routerLink="/" class="hover:text-brand-light transition">Home</a>
+      <a routerLink="/about" class="hover:text-brand-light transition">About</a>
       <a
         routerLink="/contact"
-        class="px-4 py-2 bg-brand text-white rounded hover:bg-brand-dark transition"
+        class="px-6 py-3 border-2 transition font-bold"
+        [ngClass]="
+          isScrolled || !isHomePage()
+            ? 'border-brand-deep text-brand-deep hover:bg-brand-deep hover:text-white'
+            : 'border-white text-white hover:bg-white hover:text-brand-deep'
+        "
         >Start Planning</a
       >
     </nav>
@@ -29,12 +50,14 @@
     <!-- Mobile Menu Button -->
     <button
       (click)="toggleMenu()"
-      class="md:hidden text-slate-700 focus:outline-none"
+      class="md:hidden focus:outline-none transition-colors"
       aria-label="Toggle menu"
       [attr.aria-expanded]="isMenuOpen"
+      [ngClass]="isScrolled || isMenuOpen || !isHomePage() ? 'text-brand-deep' : 'text-white'"
     >
-      <lucide-icon *ngIf="!isMenuOpen" name="menu" class="h-6 w-6 text-slate-700"></lucide-icon>
-      <lucide-icon *ngIf="isMenuOpen" name="x" class="h-6 w-6 text-slate-700"></lucide-icon>
+      <!-- Kept simpler for mobile readability against potential light backgrounds if mobile hero is different -->
+      <lucide-icon *ngIf="!isMenuOpen" name="menu" class="h-6 w-6"></lucide-icon>
+      <lucide-icon *ngIf="isMenuOpen" name="x" class="h-6 w-6"></lucide-icon>
     </button>
   </div>
 

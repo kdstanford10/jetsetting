@@ -25,7 +25,10 @@
 
     <div class="lg:w-1/2 w-full flex justify-center lg:justify-end">
       <img
-        src="assets/photo3012261.jpeg"
+        ngSrc="assets/photo3012261.jpeg"
+        width="600"
+        height="800"
+        priority
         alt="Kayla Gosney - Travel Planner"
         class="rounded-xl shadow-2xl max-h-[600px] w-auto object-contain"
       />
@@ -34,230 +37,265 @@
 </section>
 
 <!-- Services Grid Section -->
-<section id="services" class="py-20 bg-white">
-  <div class="container mx-auto px-4">
-    <div class="text-center mb-16">
-      <h2 class="text-3xl font-bold text-slate-800 mb-4 font-display">
-        What type of trip do you want?
-      </h2>
-      <p class="text-slate-600 max-w-2xl mx-auto font-sans">
-        From solo travel to large group vacations, I can plan it all. Just tell me how many people,
-        the age ranges, and type of destination and I will do the rest!
-      </p>
-    </div>
+@defer (on viewport) {
+  <section id="services" class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-slate-800 mb-4 font-display">
+          What type of trip do you want?
+        </h2>
+        <p class="text-slate-600 max-w-2xl mx-auto font-sans">
+          From solo travel to large group vacations, I can plan it all. Just tell me how many
+          people, the age ranges, and type of destination and I will do the rest!
+        </p>
+      </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-      @for (service of services; track service.title) {
-        <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-slate-100 group">
-          <div
-            [class]="
-              'h-96 flex items-center justify-center overflow-hidden relative ' + service.color
-            "
-          >
-            @if (service.image) {
-              <img
-                [src]="service.image"
-                [alt]="service.title"
-                class="w-full h-full object-cover transition-all duration-500"
-                [class]="service.imageClass || 'object-center'"
-              />
-            } @else {
-              <span class="text-slate-700 font-bold opacity-50">{{ service.title }} Image</span>
-            }
-          </div>
-          <div class="p-6">
-            <h3
-              class="text-xl font-bold text-brand mb-2 font-display group-hover:text-brand-dark transition"
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+        @for (service of services; track service.title) {
+          <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-slate-100 group">
+            <div
+              [class]="
+                'h-96 flex items-center justify-center overflow-hidden relative ' + service.color
+              "
             >
-              {{ service.title }}
-            </h3>
-            <p class="text-slate-600 text-sm font-sans">{{ service.description }}</p>
+              @if (service.image) {
+                <img
+                  [ngSrc]="service.image"
+                  fill
+                  [alt]="service.title"
+                  class="w-full h-full object-cover transition-all duration-500"
+                  [class]="service.imageClass || 'object-center'"
+                />
+              } @else {
+                <span class="text-slate-700 font-bold opacity-50">{{ service.title }} Image</span>
+              }
+            </div>
+            <div class="p-6">
+              <h3
+                class="text-xl font-bold text-brand mb-2 font-display group-hover:text-brand-dark transition"
+              >
+                {{ service.title }}
+              </h3>
+              <p class="text-slate-600 text-sm font-sans">{{ service.description }}</p>
+            </div>
           </div>
-        </div>
-      }
+        }
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+} @placeholder {
+  <div class="h-96 bg-slate-50 flex items-center justify-center">Loading services...</div>
+}
 
 <!-- About Section -->
-<section id="about" class="py-20 bg-sand/30">
-  <div class="container mx-auto px-4">
-    <div class="text-center mb-16">
-      <h2 class="text-3xl font-bold text-slate-800 mb-4 font-display">
-        4 Reasons to Hire a Travel Agent
-      </h2>
-    </div>
+@defer (on viewport) {
+  <section id="about" class="py-20 bg-sand/30">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-slate-800 mb-4 font-display">
+          4 Reasons to Hire a Travel Agent
+        </h2>
+      </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-      <!-- 1 -->
-      <div
-        class="bg-white p-8 rounded-xl shadow text-center transform transition duration-300 border-t-4 border-brand"
-      >
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- 1 -->
         <div
-          class="bg-brand/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-brand text-2xl"
+          class="bg-white p-8 rounded-xl shadow text-center transform transition duration-300 border-t-4 border-brand"
         >
-          🛡️
+          <div
+            class="bg-brand/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-brand text-2xl"
+          >
+            🛡️
+          </div>
+          <h3 class="text-xl font-bold text-slate-800 mb-3 font-display">Peace of Mind</h3>
+          <p class="text-slate-600 font-sans">
+            By entrusting your vacation planning to a professional travel agent, you gain peace of
+            mind knowing that every detail is taken care of, allowing you to relax and enjoy your
+            trip without worrying about logistics or arrangements.
+          </p>
         </div>
-        <h3 class="text-xl font-bold text-slate-800 mb-3 font-display">Peace of Mind</h3>
-        <p class="text-slate-600 font-sans">
-          By entrusting your vacation planning to a professional travel agent, you gain peace of
-          mind knowing that every detail is taken care of, allowing you to relax and enjoy your trip
-          without worrying about logistics or arrangements.
-        </p>
-      </div>
-      <!-- 2 -->
-      <div
-        class="bg-white p-8 rounded-xl shadow text-center transform transition duration-300 border-t-4 border-brand"
-      >
+        <!-- 2 -->
         <div
-          class="bg-brand/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-brand text-2xl"
+          class="bg-white p-8 rounded-xl shadow text-center transform transition duration-300 border-t-4 border-brand"
         >
-          📋
+          <div
+            class="bg-brand/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-brand text-2xl"
+          >
+            📋
+          </div>
+          <h3 class="text-xl font-bold text-slate-800 mb-3 font-display">Stress Free Planning</h3>
+          <p class="text-slate-600 font-sans">
+            From itinerary creation to handling unforeseen circumstances during your trip, a travel
+            agent provides ongoing support and assistance, ensuring a stress-free travel experience
+            from start to finish.
+          </p>
         </div>
-        <h3 class="text-xl font-bold text-slate-800 mb-3 font-display">Stress Free Planning</h3>
-        <p class="text-slate-600 font-sans">
-          From itinerary creation to handling unforeseen circumstances during your trip, a travel
-          agent provides ongoing support and assistance, ensuring a stress-free travel experience
-          from start to finish.
-        </p>
-      </div>
-      <!-- 3 -->
-      <div
-        class="bg-white p-8 rounded-xl shadow text-center transform transition duration-300 border-t-4 border-brand"
-      >
+        <!-- 3 -->
         <div
-          class="bg-brand/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-brand text-2xl"
+          class="bg-white p-8 rounded-xl shadow text-center transform transition duration-300 border-t-4 border-brand"
         >
-          💡
+          <div
+            class="bg-brand/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-brand text-2xl"
+          >
+            💡
+          </div>
+          <h3 class="text-xl font-bold text-slate-800 mb-3 font-display">Expertise & Knowledge</h3>
+          <p class="text-slate-600 font-sans">
+            Travel agents have comprehensive knowledge of destinations, accommodations,
+            transportation options, and activities, ensuring you make informed decisions tailored to
+            your preferences and budget.
+          </p>
         </div>
-        <h3 class="text-xl font-bold text-slate-800 mb-3 font-display">Expertise & Knowledge</h3>
-        <p class="text-slate-600 font-sans">
-          Travel agents have comprehensive knowledge of destinations, accommodations, transportation
-          options, and activities, ensuring you make informed decisions tailored to your preferences
-          and budget.
-        </p>
-      </div>
-      <!-- 4 -->
-      <div
-        class="bg-white p-8 rounded-xl shadow text-center transform transition duration-300 border-t-4 border-brand"
-      >
+        <!-- 4 -->
         <div
-          class="bg-brand/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-brand text-2xl"
+          class="bg-white p-8 rounded-xl shadow text-center transform transition duration-300 border-t-4 border-brand"
         >
-          ✏️
+          <div
+            class="bg-brand/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-brand text-2xl"
+          >
+            ✏️
+          </div>
+          <h3 class="text-xl font-bold text-slate-800 mb-3 font-display">Tips & Tricks</h3>
+          <p class="text-slate-600 font-sans">
+            Travel agents have insider knowledge about destinations, including hidden gems, local
+            customs, and must try experiences, enriching your vacation with unique insights and
+            opportunities.
+          </p>
         </div>
-        <h3 class="text-xl font-bold text-slate-800 mb-3 font-display">Tips & Tricks</h3>
-        <p class="text-slate-600 font-sans">
-          Travel agents have insider knowledge about destinations, including hidden gems, local
-          customs, and must try experiences, enriching your vacation with unique insights and
-          opportunities.
-        </p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+} @placeholder {
+  <div class="h-96 bg-sand/30 flex items-center justify-center">Loading expertise...</div>
+}
 
 <!-- Contact Form Section -->
-<section id="contact" class="py-20 bg-brand text-white relative overflow-hidden">
-  <div
-    class="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full -translate-x-1/2 -translate-y-1/2 blur-2xl"
-  ></div>
-  <div
-    class="absolute bottom-0 right-0 w-96 h-96 bg-white/10 rounded-full translate-x-1/3 translate-y-1/3 blur-3xl"
-  ></div>
-
-  <div class="container mx-auto px-4 relative z-10 flex flex-col md:flex-row gap-12 items-center">
-    <div class="md:w-1/2">
-      <h2 class="text-3xl lg:text-4xl font-bold mb-6 font-display">Get Your Trip Planned FREE!</h2>
-      <p class="text-blue-50 text-lg mb-8 font-sans">
-        Ready to start planning your dream vacation? Fill out the form, and I'll be in touch to
-        discuss your perfect itinerary.
-      </p>
-      <ul class="space-y-4 font-sans">
-        <li class="flex items-center gap-4">
-          <span class="bg-white/20 p-3 rounded-full">📧</span>
-          <span>Hello@jetsettingwithkayla.com</span>
-        </li>
-      </ul>
-    </div>
-
+@defer (on viewport) {
+  <section id="contact" class="py-20 bg-brand text-white relative overflow-hidden">
     <div
-      class="md:w-1/2 w-full bg-white text-slate-800 p-8 rounded-2xl shadow-2xl border-4 border-white/20"
-    >
-      <div *ngIf="submitSuccess" class="p-6 bg-green-50 rounded-lg text-center">
-        <h3 class="text-2xl text-green-700 font-bold mb-2">Message Sent!</h3>
-        <p class="text-green-800">Thanks for reaching out. I'll get back to you soon.</p>
-        <button (click)="submitSuccess = false" class="mt-4 text-green-700 underline">
-          Send another message
-        </button>
+      class="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full -translate-x-1/2 -translate-y-1/2 blur-2xl"
+    ></div>
+    <div
+      class="absolute bottom-0 right-0 w-96 h-96 bg-white/10 rounded-full translate-x-1/3 translate-y-1/3 blur-3xl"
+    ></div>
+
+    <div class="container mx-auto px-4 relative z-10 flex flex-col md:flex-row gap-12 items-center">
+      <div class="md:w-1/2">
+        <h2 class="text-3xl lg:text-4xl font-bold mb-6 font-display">
+          Get Your Trip Planned FREE!
+        </h2>
+        <p class="text-blue-50 text-lg mb-8 font-sans">
+          Ready to start planning your dream vacation? Fill out the form, and I'll be in touch to
+          discuss your perfect itinerary.
+        </p>
+        <ul class="space-y-4 font-sans">
+          <li class="flex items-center gap-4">
+            <span class="bg-white/20 p-3 rounded-full">📧</span>
+            <span>Hello@jetsettingwithkayla.com</span>
+          </li>
+        </ul>
       </div>
 
-      <form
-        *ngIf="!submitSuccess"
-        [formGroup]="contactForm"
-        (ngSubmit)="onSubmit()"
-        class="space-y-4"
+      <div
+        class="md:w-1/2 w-full bg-white text-slate-800 p-8 rounded-2xl shadow-2xl border-4 border-white/20"
       >
-        <div *ngIf="submitError" class="p-3 bg-red-100 text-red-700 rounded-lg text-sm mb-4">
-          {{ submitError }}
+        <div *ngIf="submitSuccess" class="p-6 bg-green-50 rounded-lg text-center">
+          <h3 class="text-2xl text-green-700 font-bold mb-2">Message Sent!</h3>
+          <p class="text-green-800">Thanks for reaching out. I'll get back to you soon.</p>
+          <button (click)="submitSuccess = false" class="mt-4 text-green-700 underline">
+            Send another message
+          </button>
         </div>
 
-        <div>
-          <label class="block text-sm font-bold mb-1 text-slate-700">Name</label>
-          <input
-            formControlName="name"
-            type="text"
-            class="w-full border border-slate-300 rounded p-3 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand"
-            [class.border-red-500]="
-              contactForm.get('name')?.invalid && contactForm.get('name')?.touched
-            "
-            placeholder="Your Name"
-          />
-        </div>
-        <div>
-          <label class="block text-sm font-bold mb-1 text-slate-700">Email</label>
-          <input
-            formControlName="email"
-            type="email"
-            class="w-full border border-slate-300 rounded p-3 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand"
-            [class.border-red-500]="
-              contactForm.get('email')?.invalid && contactForm.get('email')?.touched
-            "
-            placeholder="your@email.com"
-          />
-        </div>
-        <div>
-          <label class="block text-sm font-bold mb-1 text-slate-700">Trip Type</label>
-          <select
-            formControlName="tripType"
-            class="w-full border border-slate-300 rounded p-3 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand"
-          >
-            <option value="Family Vacation">Family Vacation</option>
-            <option value="Romantic Getaway">Romantic Getaway</option>
-            <option value="Group Travel">Group Travel</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
-        <div>
-          <label class="block text-sm font-bold mb-1 text-slate-700">Message</label>
-          <textarea
-            formControlName="message"
-            rows="4"
-            class="w-full border border-slate-300 rounded p-3 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand"
-            [class.border-red-500]="
-              contactForm.get('message')?.invalid && contactForm.get('message')?.touched
-            "
-            placeholder="Tell me about your dream trip..."
-          ></textarea>
-        </div>
-        <button
-          type="submit"
-          [disabled]="contactForm.invalid || isSubmitting"
-          class="w-full bg-brand text-white font-bold py-3 rounded-lg hover:bg-brand-dark transition shadow-lg transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed"
+        <form
+          *ngIf="!submitSuccess"
+          [formGroup]="contactForm"
+          (ngSubmit)="onSubmit()"
+          class="space-y-4"
         >
-          {{ isSubmitting ? 'Sending...' : 'Send Message' }}
-        </button>
-      </form>
+          <div *ngIf="submitError" class="p-3 bg-red-100 text-red-700 rounded-lg text-sm mb-4">
+            {{ submitError }}
+          </div>
+
+          <div>
+            <label for="name" class="block text-sm font-bold mb-1 text-slate-700">Name</label>
+            <input
+              id="name"
+              formControlName="name"
+              type="text"
+              class="w-full border border-slate-300 rounded p-3 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand"
+              [class.border-red-500]="
+                contactForm.get('name')?.invalid && contactForm.get('name')?.touched
+              "
+              placeholder="Your Name"
+            />
+          </div>
+          <div>
+            <label for="email" class="block text-sm font-bold mb-1 text-slate-700">Email</label>
+            <input
+              id="email"
+              formControlName="email"
+              type="email"
+              class="w-full border border-slate-300 rounded p-3 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand"
+              [class.border-red-500]="
+                contactForm.get('email')?.invalid && contactForm.get('email')?.touched
+              "
+              placeholder="your@email.com"
+            />
+          </div>
+          <div>
+            <label for="phone" class="block text-sm font-bold mb-1 text-slate-700"
+              >Phone (Optional)</label
+            >
+            <input
+              id="phone"
+              formControlName="phone"
+              type="tel"
+              class="w-full border border-slate-300 rounded p-3 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand"
+              placeholder="(555) 555-5555"
+            />
+          </div>
+          <div>
+            <label for="tripType" class="block text-sm font-bold mb-1 text-slate-700"
+              >Trip Type</label
+            >
+            <select
+              id="tripType"
+              formControlName="tripType"
+              class="w-full border border-slate-300 rounded p-3 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand"
+            >
+              <option value="Family Vacation">Family Vacation</option>
+              <option value="Romantic Getaway">Romantic Getaway</option>
+              <option value="Group Travel">Group Travel</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div>
+            <label for="message" class="block text-sm font-bold mb-1 text-slate-700">Message</label>
+            <textarea
+              id="message"
+              formControlName="message"
+              rows="4"
+              class="w-full border border-slate-300 rounded p-3 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand"
+              [class.border-red-500]="
+                contactForm.get('message')?.invalid && contactForm.get('message')?.touched
+              "
+              placeholder="Tell me about your dream trip..."
+            ></textarea>
+          </div>
+          <button
+            type="submit"
+            [disabled]="contactForm.invalid || isSubmitting"
+            class="w-full bg-brand text-white font-bold py-3 rounded-lg hover:bg-brand-dark transition shadow-lg transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {{ isSubmitting ? 'Sending...' : 'Send Message' }}
+          </button>
+        </form>
+      </div>
     </div>
+  </section>
+} @placeholder {
+  <div class="h-96 bg-brand flex items-center justify-center text-white">
+    Loading contact form...
   </div>
-</section>
+}

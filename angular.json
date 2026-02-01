@@ -29,7 +29,10 @@
               },
               "src/assets"
             ],
-            "styles": ["src/styles.scss"]
+            "styles": ["src/styles.scss"],
+            "outputPath": "dist/jetsetting-web",
+            "prerender": false,
+            "ssr": false
           },
           "configurations": {
             "production": {

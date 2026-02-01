@@ -6,7 +6,7 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
-    "public": "dist\\jetsetting-web\\browser",
+    "public": "dist/jetsetting-web/browser",
     "ignore": [
       "firebase.json",
       "**/.*",

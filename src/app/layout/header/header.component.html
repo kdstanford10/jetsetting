@@ -4,7 +4,14 @@
 >
   <div class="container mx-auto px-4 py-4 flex justify-between items-center relative">
     <a routerLink="/" class="text-2xl font-bold text-brand-dark flex items-center gap-3">
-      <img src="assets/Jetsetting-With-Kayla.png" alt="Jetsetting with Kayla" class="h-16 w-auto" />
+      <img
+        ngSrc="assets/Jetsetting-With-Kayla.png"
+        width="64"
+        height="64"
+        priority
+        alt="Jetsetting with Kayla"
+        class="h-16 w-auto"
+      />
       Jetsetting with Kayla
     </a>
 
@@ -16,7 +23,7 @@
         routerLink="/"
         fragment="contact"
         class="px-4 py-2 bg-brand text-white rounded hover:bg-brand-dark transition"
-        >Contact Me</a
+        >Start Planning</a
       >
     </nav>
 
@@ -25,6 +32,7 @@
       (click)="toggleMenu()"
       class="md:hidden text-slate-700 focus:outline-none"
       aria-label="Toggle menu"
+      [attr.aria-expanded]="isMenuOpen"
     >
       <svg
         *ngIf="!isMenuOpen"

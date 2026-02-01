@@ -23,13 +23,14 @@ setGlobalOptions({ maxInstances: 10 });
 interface ContactRequest {
   name: string;
   email: string;
+  phone?: string;
   tripType: string;
   message: string;
 }
 
 export const submitContactForm = onCall<ContactRequest>(async (request) => {
   // 1. Validation
-  const { name, email, tripType, message } = request.data;
+  const { name, email, phone, tripType, message } = request.data;
 
   if (!name || !email || !message) {
     throw new HttpsError('invalid-argument', 'Missing required fields.');
@@ -51,6 +52,7 @@ export const submitContactForm = onCall<ContactRequest>(async (request) => {
               <h2>New Contact Request</h2>
               <p><strong>Name:</strong> ${name}</p>
               <p><strong>Email:</strong> ${email}</p>
+              <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
               <p><strong>Trip Type:</strong> ${tripType}</p>
               <p><strong>Message:</strong></p>
               <p>${message.replace(/\n/g, '<br>')}</p>

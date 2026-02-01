@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { Functions, httpsCallable } from '@angular/fire/functions';
 
 interface TripType {
@@ -15,7 +15,7 @@ interface TripType {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, NgOptimizedImage],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
@@ -46,6 +46,7 @@ export class HomeComponent {
   contactForm: FormGroup = this.fb.group({
     name: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
+    phone: [''],
     tripType: ['Family Vacation', Validators.required],
     message: ['', Validators.required],
   });

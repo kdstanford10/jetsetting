@@ -5,7 +5,7 @@ import { RouterLink } from '@angular/router';
   selector: 'app-about-page',
   standalone: true,
   imports: [RouterLink],
-  templateUrl: './about-page.html',
-  styleUrl: './about-page.scss',
+  templateUrl: './about-page.component.html',
+  styleUrl: './about-page.component.scss',
 })
 export class AboutPageComponent {}

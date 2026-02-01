@@ -7,26 +7,65 @@
  * See a full list of supported triggers at https://firebase.google.com/docs/functions
  */
 
-import {setGlobalOptions} from "firebase-functions";
-import {onRequest} from "firebase-functions/https";
-import * as logger from "firebase-functions/logger";
+import { setGlobalOptions } from 'firebase-functions';
+import { onCall, HttpsError } from 'firebase-functions/v2/https';
+import * as logger from 'firebase-functions/logger';
+import { initializeApp } from 'firebase-admin/app';
+import { getFirestore } from 'firebase-admin/firestore';
+
+initializeApp();
 
 // Start writing functions
 // https://firebase.google.com/docs/functions/typescript
 
-// For cost control, you can set the maximum number of containers that can be
-// running at the same time. This helps mitigate the impact of unexpected
-// traffic spikes by instead downgrading performance. This limit is a
-// per-function limit. You can override the limit for each function using the
-// `maxInstances` option in the function's options, e.g.
-// `onRequest({ maxInstances: 5 }, (req, res) => { ... })`.
-// NOTE: setGlobalOptions does not apply to functions using the v1 API. V1
-// functions should each use functions.runWith({ maxInstances: 10 }) instead.
-// In the v1 API, each function can only serve one request per container, so
-// this will be the maximum concurrent request count.
 setGlobalOptions({ maxInstances: 10 });
 
-// export const helloWorld = onRequest((request, response) => {
-//   logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+interface ContactRequest {
+  name: string;
+  email: string;
+  tripType: string;
+  message: string;
+}
+
+export const submitContactForm = onCall<ContactRequest>(async (request) => {
+  // 1. Validation
+  const { name, email, tripType, message } = request.data;
+
+  if (!name || !email || !message) {
+    throw new HttpsError('invalid-argument', 'Missing required fields.');
+  }
+
+  // Basic email validation regex
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    throw new HttpsError('invalid-argument', 'Invalid email format.');
+  }
+
+  // 2. Prepare data for Firestore Email Extension
+  // The extension listens to the 'mail' collection (by default)
+  const mailData = {
+    to: ['Hello@jetsettingwithkayla.com'], // The recipient(s)
+    message: {
+      subject: `New Contact Request from ${name} - ${tripType}`,
+      html: `
+              <h2>New Contact Request</h2>
+              <p><strong>Name:</strong> ${name}</p>
+              <p><strong>Email:</strong> ${email}</p>
+              <p><strong>Trip Type:</strong> ${tripType}</p>
+              <p><strong>Message:</strong></p>
+              <p>${message.replace(/\n/g, '<br>')}</p>
+          `,
+    },
+    originalRequest: request.data,
+    submittedAt: new Date().toISOString(),
+  };
+
+  // 3. Save to Firestore
+  try {
+    await getFirestore().collection('mail').add(mailData);
+    return { success: true, message: 'Message received!' };
+  } catch (error) {
+    logger.error('Error saving contact form:', error);
+    throw new HttpsError('internal', 'Unable to save contact request.');
+  }
+});

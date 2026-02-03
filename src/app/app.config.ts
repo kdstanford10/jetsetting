@@ -1,4 +1,4 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { ApplicationConfig, provideBrowserGlobalErrorListeners, isDevMode } from '@angular/core';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideFirebaseApp, initializeApp, getApp } from '@angular/fire/app';
@@ -25,6 +25,9 @@ export const appConfig: ApplicationConfig = {
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAppCheck(() => {
       const provider = new ReCaptchaV3Provider(environment.recaptchaSiteKey);
+      if (isDevMode()) {
+        (self as any).FIREBASE_APPCHECK_DEBUG_TOKEN = true;
+      }
       return initializeAppCheck(getApp(), { provider, isTokenAutoRefreshEnabled: true });
     }),
     provideAnalytics(() => getAnalytics()),

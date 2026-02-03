@@ -42,7 +42,7 @@
             id="name"
             formControlName="name"
             type="text"
-            class="w-full border border-slate-300 rounded p-3 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand"
+            class="w-full border border-slate-300 rounded p-3 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand !text-gray-900 !bg-white"
             [class.border-red-500]="
               contactForm.get('name')?.invalid && contactForm.get('name')?.touched
             "
@@ -55,7 +55,7 @@
             id="email"
             formControlName="email"
             type="email"
-            class="w-full border border-slate-300 rounded p-3 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand"
+            class="w-full border border-slate-300 rounded p-3 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand !text-gray-900 !bg-white"
             [class.border-red-500]="
               contactForm.get('email')?.invalid && contactForm.get('email')?.touched
             "
@@ -70,7 +70,7 @@
             id="phone"
             formControlName="phone"
             type="tel"
-            class="w-full border border-slate-300 rounded p-3 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand"
+            class="w-full border border-slate-300 rounded p-3 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand !text-gray-900 !bg-white"
             placeholder="(555) 555-5555"
           />
         </div>
@@ -81,7 +81,7 @@
           <select
             id="tripType"
             formControlName="tripType"
-            class="w-full border border-slate-300 rounded p-3 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand"
+            class="w-full border border-slate-300 rounded p-3 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand !text-gray-900 !bg-white"
           >
             <option value="Family Vacation">Family Vacation</option>
             <option value="Romantic Getaway">Romantic Getaway</option>
@@ -95,7 +95,7 @@
             id="message"
             formControlName="message"
             rows="4"
-            class="w-full border border-slate-300 rounded p-3 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand"
+            class="w-full border border-slate-300 rounded p-3 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand !text-gray-900 !bg-white"
             [class.border-red-500]="
               contactForm.get('message')?.invalid && contactForm.get('message')?.touched
             "

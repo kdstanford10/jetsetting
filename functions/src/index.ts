@@ -50,6 +50,7 @@ export const submitContactForm = onCall<ContactRequest>(
       to: ["Hello@jetsettingwithkayla.com"], // The recipient(s)
       message: {
         subject: `New Contact Request from ${name} - ${tripType}`,
+        replyTo: email,
         html: `
               <h2>New Contact Request</h2>
               <p><strong>Name:</strong> ${name}</p>

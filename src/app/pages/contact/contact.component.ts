@@ -17,7 +17,7 @@ export class ContactComponent {
 
   contactForm: FormGroup = this.fb.group({
     name: ['', Validators.required],
-    email: ['', [Validators.required, Validators.email]],
+    email: ['', [Validators.required, Validators.pattern(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)]],
     phone: [''],
     tripType: ['Family Vacation', Validators.required],
     message: ['', Validators.required],
@@ -44,5 +44,29 @@ export class ContactComponent {
     } finally {
       this.isSubmitting = false;
     }
+  }
+
+  onPhoneInput(event: Event) {
+    const input = event.target as HTMLInputElement;
+    let value = input.value.replace(/\D/g, ''); // Strip non-digits
+
+    // Limit to 10 digits
+    if (value.length > 10) {
+      value = value.substring(0, 10);
+    }
+
+    // Format as (XXX) XXX-XXXX
+    let formatted = '';
+    if (value.length > 0) {
+      formatted = `(${value.substring(0, 3)}`;
+    }
+    if (value.length > 3) {
+      formatted += `) ${value.substring(3, 6)}`;
+    }
+    if (value.length > 6) {
+      formatted += `-${value.substring(6, 10)}`;
+    }
+
+    this.contactForm.get('phone')?.setValue(formatted, { emitEvent: false });
   }
 }

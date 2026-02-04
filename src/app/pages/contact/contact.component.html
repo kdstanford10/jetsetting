@@ -70,8 +70,10 @@
             id="phone"
             formControlName="phone"
             type="tel"
+            (input)="onPhoneInput($event)"
             class="w-full border border-slate-300 rounded p-3 focus:outline-none focus:border-brand focus:ring-1 focus:ring-brand !text-gray-900 !bg-white"
             placeholder="(555) 555-5555"
+            maxlength="14"
           />
         </div>
         <div>
